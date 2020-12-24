@@ -11,6 +11,8 @@ Post.destroy_all
 Comment.destroy_all
 Like.destroy_all
 
+imageURL = 'https://images.unsplash.com/photo-1587502537147-2ba64a62e3d3?ixid=MXwxMjA3fDF8MHxzZWFyY2h8MXx8aGlraW5nfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'
+
 5.times do 
     User.create( 
         first_name: Faker::Name.first_name,
@@ -24,6 +26,8 @@ end
     Post.create(
         user_id: User.all.sample.id,
         text: Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 4),
+        image: imageURL,
+        location: Faker::Mountain.range
     )
 end
 
