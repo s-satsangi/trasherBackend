@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   skip_before_action :authorized, only: [:create]
 
+  def profile
+    render json: { user: current_user.username}, status: :accepted
+  end
+
   def create
     # byebug
     @user=User.create(user_params)
