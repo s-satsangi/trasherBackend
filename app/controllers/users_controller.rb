@@ -5,6 +5,11 @@ class UsersController < ApplicationController
     render json: { user: current_user.username}, status: :accepted
   end
 
+  def show
+    @user = User.find(params[:id])
+    render json: @user
+  end
+
   def create
     # byebug
     @user=User.create(user_params)
