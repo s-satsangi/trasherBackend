@@ -1,20 +1,9 @@
 Rails.application.routes.draw do
   resources :comments
-<<<<<<< HEAD
-<<<<<<< HEAD
   post 'likes', to: 'likes#create'
   get 'posts/index/:num', to: 'posts#index'
   get 'posts/:id', to: 'posts#show'
-=======
-  resources :likes
-  resources :posts
->>>>>>> parent of b233018 (create like)
   get 'users/create', to: 'users#create'
-=======
-  resources :likes
-  resources :posts
-  post 'users', to: 'users#create'
->>>>>>> main
   get 'users/delete', to: 'users#delete'
   get 'users/update', to: 'users#update'
 
