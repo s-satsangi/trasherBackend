@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   resources :comments
-  post 'likes', to: 'likes#create'
-  get 'posts/index/:num', to: 'posts#index'
-  get 'posts/:id', to: 'posts#show'
+  resources :likes
+  resources :posts
   get 'users/create', to: 'users#create'
   get 'users/delete', to: 'users#delete'
   get 'users/update', to: 'users#update'
