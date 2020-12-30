@@ -11,7 +11,9 @@ class LikesController < ApplicationController
             type = Comment
         end
         @like = Like.new(like_params)
-        puts @like.save
+        if !@like.save
+            Like.find_by(user_id: like_params[:user_id]).destroy
+        end
         render json: @like
     end
 
