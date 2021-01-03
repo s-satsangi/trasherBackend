@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::API
+    include ::ActionController::Cookies
     before_action :authorized
 
     def encode_jwt(encodable)
         # encode the info and return
-        JWT.encode(encodable, "Dontcha be a mussmaker")
+        JWT.encode(encodable, Rails.application.secrets.secret_key_base)
     end
 
     def auth_header
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::API
             token = auth_header.split(' ')[1]
             begin
                 # decode the token, return the decoded part
-                JWT.decode(token, "Dontcha be a mussmaker",true, algorithm: 'HS256')
+                JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
             rescue JWT::DecodeError    
                 nil
             end

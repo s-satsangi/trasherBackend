@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
-User.destroy_all
+# User.destroy_all
 Post.destroy_all
 Comment.destroy_all
 Like.destroy_all
@@ -18,18 +18,19 @@ imageURL = 'https://images.unsplash.com/photo-1587502537147-2ba64a62e3d3?ixid=MX
         first_name: Faker::Name.first_name,
         middle_name: Faker::Name.middle_name,
         last_name: Faker::Name.last_name,
-        username: Faker::Esport.player
+        username: Faker::Esport.player,
+        password: "changeme"
     )
 end
-
 30.times do 
     Post.create(
-        user_id: User.all.sample.id,
         text: Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 4),
         image: imageURL,
-        location: Faker::Mountain.range
+        location: Faker::Mountain.range,
+        user_id: 34
     )
 end
+# byebug
 
 20.times do 
     Comment.create(
