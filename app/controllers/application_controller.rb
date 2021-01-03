@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
     include ::ActionController::Cookies
-    before_action :authorized
+    before_action :authenticate_user
 
     def encode_jwt(encodable)
         # encode the info and return
@@ -11,34 +11,35 @@ class ApplicationController < ActionController::API
         request.headers['Authorization']
     end
 
-    def decode_jwt
+    def decode_jwt(jwt)
         #check the headers in post for jwt
+        # byebug
         if auth_header  
-            token = cookies.signed[:jwt]
+            # token = cookies.signed[:jwt]
             # auth_header.split(' ')[1]
             begin
                 # decode the token, return the decoded part
-                JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
-            rescue JWT::DecodeError    
+                JWT.decode(jwt, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+            rescue JWT::DecodeError 
+                # byebug 
+                render json: {message: "NOPE!!!! Really no!"}, status: :unauthorised
+
                 nil
             end
         end
     end
 
+
     def current_user
-        if decode_jwt
-            user_id=decode_jwt[0]['user_id']
+        if decode_jwt(cookies.signed[:jwt])
+            user_id=decode_jwt(cookies.signed[:jwt])
+            # decode_jwt[0]['user_id']
             @user=User.find_by(id: user_id)
         end
     end
 
     def logged_in?
         !!current_user
-    end
-
-    def authorized
-        #byebug
-        render json: {message: "You needsta log in yet"}, status: :unauthorized unless logged_in?
     end
 
     def authenticate_user

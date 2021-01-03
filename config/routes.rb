@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'users/update', to: 'users#update'
 
   post '/login', to: 'auth#create'
+  delete '/logout', to: 'auth#destroy'
   get '/profile', to: 'users#profile'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

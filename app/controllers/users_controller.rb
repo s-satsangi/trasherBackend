@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authorized, only: [:create]
+  skip_before_action :authenticate_user, only: [:create]
 
   def profile
     render json: { user: current_user.username}, status: :accepted
