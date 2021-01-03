@@ -3,7 +3,6 @@ class LikesController < ApplicationController
         @likes = Like.all
         render json: @likes
     end
-<<<<<<< HEAD
 
     def create
         if (params['like']['upvote_type'] == 'Post')
@@ -23,6 +22,4 @@ class LikesController < ApplicationController
     def like_params
         params.require(:like).permit(:user_id, :upvote_id, :upvote_type)
     end
-=======
->>>>>>> 82818f7ae472365afee32fbf09ad22f8ec700518
 end
