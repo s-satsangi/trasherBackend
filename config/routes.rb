@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
   post 'comments', to: 'comments#create'
-=======
-  resources :comments
->>>>>>> postbuttons
   post 'likes', to: 'likes#create'
   get 'posts/index/:num', to: 'posts#index'
   get 'posts/:id', to: 'posts#show'
