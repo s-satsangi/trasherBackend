@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+    before_action :authenticate_user
+
     def index
         @posts = Post.all
         # .slice(params[:num].to_i, params[:num].to_i + 10)

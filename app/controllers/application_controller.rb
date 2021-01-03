@@ -14,7 +14,8 @@ class ApplicationController < ActionController::API
     def decode_jwt
         #check the headers in post for jwt
         if auth_header  
-            token = auth_header.split(' ')[1]
+            token = cookies.signed[:jwt]
+            # auth_header.split(' ')[1]
             begin
                 # decode the token, return the decoded part
                 JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
@@ -36,7 +37,14 @@ class ApplicationController < ActionController::API
     end
 
     def authorized
+        #byebug
         render json: {message: "You needsta log in yet"}, status: :unauthorized unless logged_in?
+    end
+
+    def authenticate_user
+        # byebug
+        jwt = cookies.signed[:jwt]
+        decode_jwt(jwt)
     end
 
 end
