@@ -32,7 +32,7 @@ class ApplicationController < ActionController::API
     end
 
     def logged_in?
-        !!curent_user
+        !!current_user
     end
 
     def authorized
