@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'posts/index/:num', to: 'posts#index'
   get 'posts/:id', to: 'posts#show'
   get 'users/create', to: 'users#create'
-  post 'users/create', to: 'users#create'
+  post 'users', to: 'users#create'
   get 'users/delete', to: 'users#delete'
   get 'users/update', to: 'users#update'
 

@@ -13,7 +13,10 @@ class UsersController < ApplicationController
 
   def create
     # byebug
-    @user=User.create(user_params)
+    @user=User.new(user_params)
+    if !@user.save
+      return render json: {status: "error", message: "#{user_params[:username]} is taken. Please choose another username. Be creative. Be be creative. (cheerleader chant)"}
+    end
     # if we add validations check if user is valid, then
     @token = encode_jwt(@user.id)
     render json: {user: @user.username, jwt: @token}, status: :created
