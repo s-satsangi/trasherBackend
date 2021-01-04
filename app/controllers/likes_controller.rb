@@ -12,7 +12,7 @@ class LikesController < ApplicationController
         end
         @like = Like.new(like_params)
         if !@like.save
-            Like.find_by(user_id: like_params[:user_id]).destroy
+            Like.find_by(upvote_id: like_params[:upvote_id]).destroy
         end
         render json: @like
     end
