@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'likes', to: 'likes#create'
   get 'posts/index/:num', to: 'posts#index'
   get 'posts/:id', to: 'posts#show'
+  post 'posts', to: 'posts#create'
   get 'users/create', to: 'users#create'
   post 'users', to: 'users#create'
   get 'users/delete', to: 'users#delete'

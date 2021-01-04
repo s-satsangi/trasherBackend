@@ -5,7 +5,7 @@ class AuthController < ApplicationController
         # byebug
         @user = User.find_by(username: user_login_params[:username])
         if @user && @user.authenticate(user_login_params[:password])
-            token=encode_jwt({user_id: @user.id})
+            token=encode_jwt({user_id: @user.id, username: @username})
             cookies.signed[:jwt] = {value:  token, httponly: true}
             render json: {user: @user.username}, status: :accepted
         else

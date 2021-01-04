@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
     include ::ActionController::Cookies
     before_action :authenticate_user
+    #before_action :require_login
+
 
     def encode_jwt(encodable)
         # encode the info and return
@@ -22,7 +24,7 @@ class ApplicationController < ActionController::API
                 JWT.decode(jwt, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
             rescue JWT::DecodeError 
                 # byebug 
-                render json: {message: "NOPE!!!! Really no!"}, status: :unauthorised
+                render json: {message: "NOPE!!!! Really no!"}, status: :unauthorized
 
                 nil
             end
@@ -34,7 +36,8 @@ class ApplicationController < ActionController::API
         if decode_jwt(cookies.signed[:jwt])
             user_id=decode_jwt(cookies.signed[:jwt])
             # decode_jwt[0]['user_id']
-            @user=User.find_by(id: user_id)
+            
+            return @user=User.find_by(id: user_id)
         end
     end
 
@@ -46,6 +49,15 @@ class ApplicationController < ActionController::API
         # byebug
         jwt = cookies.signed[:jwt]
         decode_jwt(jwt)
+    end
+
+
+    private
+  
+    def require_login
+      unless logged_in?
+        render json: {error: "I'm pretty sure you're logged in.  This should be working.  Why isn't this working?  Log in harder."}
+      end 
     end
 
 end
