@@ -14,9 +14,8 @@ class AuthController < ApplicationController
     end
 
     def destroy
-        # puts "hey hio"
         cookies.delete(:jwt)
-        render json: {message: "cookie destroyed!"}
+        render json: {message: "cookie destroyed!"}, status: :unauthorized
     end
 
     private
