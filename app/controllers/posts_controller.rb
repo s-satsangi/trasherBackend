@@ -26,6 +26,7 @@ class PostsController < ApplicationController
         if !@post.save
             return render json: {status: "error", message: "Beep boop bad post"}
         end
+        render json: @post
     end
 
     def update
