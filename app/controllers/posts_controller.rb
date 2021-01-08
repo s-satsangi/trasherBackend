@@ -9,7 +9,7 @@ class PostsController < ApplicationController
         # byebug
         @posts = Post.all.sort{|a, b| b.created_at <=> a.created_at}
         # .slice(params[:num].to_i, params[:num].to_i + 10)
-        render json: @posts.to_json(include: [:comments, :likes])
+        render json: @posts.to_json(include: [:comments, :likes, :user])
     end
 
     def show
