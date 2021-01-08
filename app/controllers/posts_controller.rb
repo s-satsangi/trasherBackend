@@ -27,6 +27,16 @@ class PostsController < ApplicationController
             return render json: {status: "error", message: "Beep boop bad post"}
         end
     end
+
+    def update
+        
+    end
+
+    def delete
+        post = Post.find_by(params[:id])
+        post.delete
+        return render json: { status: "post deleted" }
+    end
     
     private
 
